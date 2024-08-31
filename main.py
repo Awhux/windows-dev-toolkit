@@ -63,21 +63,24 @@ def display_menu(scripts):
 
 def run_script(script):
     print_header()
-    script_name = os.path.basename(script).replace(".py", "").replace("_", " ",).title()
+    script_name = os.path.basename(script).replace(".py", "").replace("_", " ").title()
     console.print(f"\nRunning [bold magenta]{script_name}[/bold magenta]...")
     console.rule(style="yellow")
     
-    with yaspin(text="Executing script    ", color="yellow") as spinner:
-        try:
-            module = load_script(script)
-            if hasattr(module, 'main'):
-                module.main()
-            else:
-                console.print("[bold yellow]Warning: No 'main' function found in the script.[/bold yellow]")
-            spinner.ok("✅")
-        except Exception as e:
-            spinner.fail("❌")
-            console.print(f"[bold red]An error occurred:[/bold red] {e}")
+    start_time = time.time()
+    try:
+        module = load_script(script)
+        if hasattr(module, 'main'):
+            module.main()
+        else:
+            console.print("[bold yellow]Warning: No 'main' function found in the script.[/bold yellow]")
+        console.print("\n[bold green]Script executed successfully.[/bold green]")
+    except Exception as e:
+        console.print(f"\n[bold red]An error occurred:[/bold red] {e}")
+    finally:
+        end_time = time.time()
+        execution_time = end_time - start_time
+        console.print(f"\n[italic]Execution time: {execution_time:.2f} seconds[/italic]")
     
     console.rule(style="yellow")
     input("\nPress Enter to return to the main menu...")

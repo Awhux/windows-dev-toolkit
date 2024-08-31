@@ -22,13 +22,31 @@ def build_executable():
         command.extend(['--add-data', f'{file}{os.pathsep}.'])
 
     # Add hidden imports
+    hidden_imports = [
+        'typer',
+        'rich',
+        'yaspin',
+        'click',
+        'ipaddress',
+        'pathlib',
+        'urllib.parse',
+    ]
+    for imp in hidden_imports:
+        command.extend(['--hidden-import', imp])
+
+    # Add PyInstaller options to help with module importing
     command.extend([
-        '--hidden-import=typer',
-        '--hidden-import=rich',
-        '--hidden-import=yaspin',
-        '--hidden-import=click',
-        'main.py'
+        '--collect-all', 'typer',
+        '--collect-all', 'rich',
+        '--collect-all', 'yaspin',
+        '--collect-all', 'click',
+        '--collect-all', 'requests',
     ])
+
+    # Add main script
+    command.append('main.py')
+
+    print("Running PyInstaller with command:", ' '.join(command))
 
     # Run the PyInstaller command
     subprocess.run(command, check=True)

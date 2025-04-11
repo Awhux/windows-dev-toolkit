@@ -1,0 +1,34 @@
+# This file defines branch protection rules
+# You'll need to manually configure these settings in your GitHub repository
+
+branches:
+  - name: main
+    protection:
+      # Require pull request reviews before merging
+      required_pull_request_reviews:
+        # Required number of approvals
+        required_approving_review_count: 1
+        # Dismiss stale pull request approvals when new commits are pushed
+        dismiss_stale_reviews: true
+        # Require review from Code Owners
+        require_code_owner_reviews: false
+        # Restrict who can dismiss pull request reviews
+        dismissal_restrictions: {}
+
+      # Require status checks to pass before merging
+      required_status_checks:
+        # Require branches to be up to date before merging
+        strict: true
+        # Status checks that are required
+        contexts:
+          - "Test"
+          - "Build"
+
+      # Require conversation resolution before merging
+      required_conversation_resolution: true
+
+      # Do not allow bypassing the above settings
+      enforce_admins: true
+
+      # Restrict who can push to matching branches
+      restrictions: null

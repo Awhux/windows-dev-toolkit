@@ -5,6 +5,7 @@
     "donjayamanne.python-environment-manager",
     "kevinrose.vsc-python-indent",
     "mgesbert.python-path",
-    "njpwerner.autodocstring"
+    "njpwerner.autodocstring",
+    "ms-python.flake8"
   ]
 }

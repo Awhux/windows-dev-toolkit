@@ -36,33 +36,33 @@ build:
 	@echo "Building executable..."
 	$(PYTHON) -m pip install --upgrade pip
 	$(PYTHON) -m pip install pyinstaller
-	$(PYTHON) -m PyInstaller --onefile --clean --add-data "windows_dev_toolkit/resources/*;windows_dev_toolkit/resources/" \
-		--name $(EXE_NAME) --icon windows_dev_toolkit/resources/icon.ico \
+	$(PYTHON) -m PyInstaller --onefile --clean --add-data "src/resources/*;src/resources/" \
+		--name $(EXE_NAME) --icon src/resources/icon.ico \
 		--uac-admin --hidden-import win32api --hidden-import win32con \
 		--hidden-import winreg --hidden-import psutil \
-		windows_dev_toolkit/main.py
+		src/main.py
 	@echo "Build complete. Executable created in $(DIST_DIR)/"
 
 test:
 	@echo "Running tests..."
 	$(PYTHON) -m pip install --upgrade pip
 	$(PYTHON) -m pip install -e ".[dev]"
-	$(PYTHON) -m pytest --cov=windows_dev_toolkit tests/ -v
+	$(PYTHON) -m pytest --cov=src tests/ -v
 	@echo "Tests complete."
 
 lint:
 	@echo "Running linters..."
 	$(PYTHON) -m pip install --upgrade pip
 	$(PYTHON) -m pip install -e ".[dev]"
-	$(PYTHON) -m black windows_dev_toolkit tests
-	$(PYTHON) -m flake8 windows_dev_toolkit tests
-	$(PYTHON) -m isort windows_dev_toolkit tests
-	$(PYTHON) -m mypy windows_dev_toolkit
+	$(PYTHON) -m black src tests
+	$(PYTHON) -m flake8 src tests
+	$(PYTHON) -m isort src tests
+	$(PYTHON) -m mypy src
 	@echo "Linting complete."
 
 run:
 	@echo "Running toolkit..."
-	$(PYTHON) -m windows_dev_toolkit.main
+	$(PYTHON) -m src.main
 
 all: lint test build
 	@echo "All tasks completed successfully."

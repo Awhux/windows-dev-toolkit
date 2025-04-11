@@ -10,14 +10,14 @@ import sys
 from pathlib import Path
 
 # Local modules
-from windows_dev_toolkit.utils.admin_check import verify_admin_privileges
-from windows_dev_toolkit.utils.cleanup import CleanupManager
-from windows_dev_toolkit.utils.ui import TUIManager
-from windows_dev_toolkit.utils.feature_detection import FeatureDetection
-from windows_dev_toolkit.modules.environment_setup import EnvironmentManager
-from windows_dev_toolkit.modules.office_deployment import OfficeLTSCManager
-from windows_dev_toolkit.modules.windows_config import WindowsConfigManager
-from windows_dev_toolkit.modules.developer_keys import DeveloperKeyManager
+from src.utils.admin_check import verify_admin_privileges
+from src.utils.cleanup import CleanupManager
+from src.utils.ui import TUIManager
+from src.utils.feature_detection import FeatureDetection
+from src.modules.environment_setup import EnvironmentManager
+from src.modules.office_deployment import OfficeLTSCManager
+from src.modules.windows_config import WindowsConfigManager
+from src.modules.developer_keys import DeveloperKeyManager
 
 class DeveloperToolkit:
     """Main toolkit controller for Windows Developer Utilities"""
